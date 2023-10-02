@@ -19,6 +19,22 @@
         background: transparent;
         border: 0;
         margin-left: 1rem;
+        transition: transform 0.4s;
+
+        &:hover{
+            transform: scale(1.1);
+            animation: animate 2s ease;
+        }
+    }
+
+}
+
+@keyframes animate {
+    from {
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(180deg);
     }
 }
 
@@ -53,4 +69,13 @@
     height: 60px;
     border-radius: 0.5rem 0 0 0.5rem;
     margin-right: 1rem;
+}
+
+.emptyList{
+    font-size: 1.2rem;
+    color: var(--gray-100);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5rem;
 }

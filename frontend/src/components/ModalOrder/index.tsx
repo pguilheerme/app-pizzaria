@@ -8,12 +8,13 @@ import { OrderItemProps } from "@/src/pages/dashboard"
 interface ModalOrderProps {
     isOpen: boolean,
     onRequestClose: () => void,
-    order: OrderItemProps[]
+    order: OrderItemProps[],
+    handleFinishOrder: (id: string) => void 
 }
 
 
 
-export function ModalOrder({ isOpen, onRequestClose, order }: ModalOrderProps) {
+export function ModalOrder({ isOpen, onRequestClose, order, handleFinishOrder }: ModalOrderProps) {
     const customStyles = {
         content: {
             top: "50%",
@@ -56,7 +57,7 @@ export function ModalOrder({ isOpen, onRequestClose, order }: ModalOrderProps) {
                     )
                 } )}
 
-                <button className={styles.buttonOrder} onClick={() => {}}>
+                <button className={styles.buttonOrder} onClick={() => handleFinishOrder(order[0].order_id)}>
                     Concluir pedido
                 </button>
 

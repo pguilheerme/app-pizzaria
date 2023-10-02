@@ -44,7 +44,7 @@ export default function Category() {
                     >
                         <input 
                         type="text" 
-                        placeholder="Digite o nome da categorias" 
+                        placeholder="Digite o nome da categoria" 
                         className={styles.input}
                         value={name}
                         onChange={(e) => setName(e.target.value)}
