@@ -7,6 +7,8 @@ import { Button } from "../components/ui/Button"
 import Link from "next/link"
 import { AuthContext } from "../contexts/AuthContext"
 import { FormEvent, useContext, useState } from "react"
+import { toast } from "react-toastify"
+import { canSSRGuest } from "../utils/canSSRGuest"
 
 export default function Home() {
     const { signIn } = useContext(AuthContext)
@@ -17,18 +19,27 @@ export default function Home() {
     async function handleLogin(event: FormEvent) {
         event.preventDefault()
 
+        if(email === "" || password === ""){
+            toast.warning("Preencha todos os campos")
+            return 
+        }
+
+        setLoading(true)
+
         let data = {
            email,
            password
         }
 
         await signIn(data)
+
+        setLoading(false)
     }
 
     return (
         <>
             <Head>
-                <title>SujeitoPizza - Faça seu login</title>
+                <title>App Pizzaria - Faça seu login</title>
             </Head>
             <div className={styles.containerCenter}>
                 <Image src={logoImg} alt="Logo sujeitoPizza"/>
@@ -52,7 +63,7 @@ export default function Home() {
 
                         <Button
                             type="submit"
-                            loading={false}
+                            loading={loading}
 
                         >
                             Acessar
@@ -67,3 +78,10 @@ export default function Home() {
         </>
     )
 }
+
+export const getServerSideProps = canSSRGuest(async (ctx) => {
+    
+    return {
+        props: {}
+    }
+})
